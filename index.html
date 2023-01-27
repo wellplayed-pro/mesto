@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./pages/index.css">
+  <title>Место: базовая функциональность</title>
+</head>
+
+<body class="body">
+    <header class="header">
+      <img src="./images/logo.svg" alt="Логотип Место-Россия"
+        class="header__logo">
+    </header>
+
+    <main class="main">
+      <section class="profile">
+        <img src="./images/kusto.svg" class="profile__logo"
+          alt="Картинка профиля">
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <p class="profile__description">Исследователь океана</p>
+          <button class="button profile__button profile__button_act_edit"
+            type="button"></button>
+        </div>
+        <button class="button profile__button profile__button_act_add"
+          type="button"></button>
+      </section>
+
+      <section class="elements">
+        <div class="card">
+          <img class="card__picture" src="./images/karachaevsk.jpg"
+            alt="Крепость в Карачаевске">
+          <h2 class="card__title">Карачаевск</h2>
+          <button class="button card__like" type="button"></button>
+        </div>
+
+        <div class="card">
+          <img class="card__picture" src="./images/elbrus.jpg"
+            alt="Гора Эльбрус в тумане">
+          <h2 class="card__title">Гора Эльбрус</h2>
+          <button class="button card__like" type="button"></button>
+        </div>
+
+        <div class="card">
+          <img class="card__picture" src="./images/dombay.jpg"
+            alt="Гора Эльбрус в тумане">
+          <h2 class="card__title">Домбай</h2>
+          <button class="button card__like" type="button"></button>
+        </div>
+      </section>
+
+    </main>
+    <footer class="footer">
+      <p class="footer__copiright">&copy; 2022 Mesto Russia</p>
+    </footer>
+
+    <div class="popup">
+      <form class="popup__container" method="post" name="form-popup">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input name="name-input" value="" class="popup__input popup__input_name" type="text" placeholder="Имя">
+          <input name="job-input" value="" class="popup__input popup__input_job" type="text" placeholder="Описание">
+          <button class="popup__button popup__button_act_submit" type="submit" value="save">Сохранить</button>
+          <button class="popup__button popup__button_act_exit" type="button" value="close">Закрыть</button>
+      </form>
+  </div>
+
+    <script src="./pages/index.js"></script>
+</body>
+
+</html>

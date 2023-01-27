@@ -1,0 +1,25 @@
+.card {
+  width: 100%;
+  min-height: 361px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: 1fr min-content;
+  grid-template-areas:
+    'picture picture'
+    'title like';
+}
+
+@media screen and (max-width: 980px) {
+  .card {
+    min-height: 33%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card {
+    min-height: 360px;
+  }
+}
