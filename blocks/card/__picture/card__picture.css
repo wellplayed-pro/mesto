@@ -1,6 +1,7 @@
 .card__picture {
   max-width: 100%;
-  height: auto;
   border-radius: 10px 10px 0 0;
   grid-area: picture;
+  height: 282px;
+  object-fit: cover;
 }
