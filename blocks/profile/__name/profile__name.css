@@ -8,7 +8,7 @@
   font-size: 42px;
   line-height: 48px;
   grid-area: name;
-  transition: .7s ease;
+  transition: 0.7s ease;
   padding: 0;
   margin: 0;
 }
@@ -25,5 +25,7 @@
   .profile__name {
     font-size: 27px;
     line-height: 33px;
+
+    transform: translateX(24px);
   }
 }

@@ -4,5 +4,11 @@
   font-size: 18px;
   line-height: 22px;
   transition: .7s ease;
-  margin: 0;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 430px){
+ .footer__copyright{
+  padding: 0 19px;
+ } 
 }

@@ -1,8 +1,29 @@
 .elements {
   display: grid;
-  padding: 0;
-  width: 100%;
-  grid-template-columns: repeat(3, minmax(218px, 1fr));
-  grid-column-gap: 18px;
-  grid-row-gap: 21px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 20px;
 }
+
+@media (min-width: 320px) {
+  .elements {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px 17px;
+   
+  }
+}
+
+@media (min-width: 550px) {
+  .elements {
+    grid-template-columns: repeat(2, 1fr);
+    
+  }
+}
+
+
+@media (min-width: 700px) {
+  .elements {
+    grid-template-columns: repeat(3, 1fr);
+    
+  }
+}
+

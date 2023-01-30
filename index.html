@@ -16,8 +16,10 @@
 
   <main class="main">
     <section class="profile">
-      <img src="./images/kusto.svg" class="profile__logo"
-        alt="Картинка профиля">
+      <div>
+        <img src="./images/kusto.svg" class="profile__logo"
+          alt="Картинка профиля">
+      </div>
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <p class="profile__description">Исследователь океана</p>
@@ -74,11 +76,14 @@
 
   </main>
   <footer class="footer">
-    <p class="footer__copiright">&copy; 2023 Mesto Russia</p>
+    <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
 
   <div class="popup">
-    <form class="popup__container" method="post" name="form-popup">
+    <div class="popup__container">
+    <button class="popup__button popup__button_act_exit" type="button"
+      value="close">Закрыть</button>
+    <form method="post" name="form-popup">
       <h2 class="popup__title">Редактировать профиль</h2>
       <input name="name" class="popup__input popup__input_name"
         type="text" placeholder="Имя">
@@ -86,9 +91,8 @@
         type="text" placeholder="Описание">
       <button class="popup__button popup__button_act_submit" type="submit"
         value="save">Сохранить</button>
-      <button class="popup__button popup__button_act_exit" type="button"
-        value="close">Закрыть</button>
     </form>
+    </div>
   </div>
 
   <script src="./scripts/index.js"></script>

@@ -26,6 +26,7 @@
 @media screen and (max-width: 700px) {
   .profile__description {
     text-align: center;
+    transform: translateX(24px);
   }
 }
 

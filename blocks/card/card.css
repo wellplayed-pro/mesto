@@ -11,15 +11,8 @@
     'picture picture'
     'title like';
 }
-
-@media screen and (max-width: 980px) {
-  .card {
-    min-height: 33%;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .card {
-    min-height: 360px;
+@media (min-width: 320px) {
+  .elements {
+    max-width: fit-content;
   }
 }
