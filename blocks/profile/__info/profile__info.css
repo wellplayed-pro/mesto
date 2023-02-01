@@ -1,17 +1,14 @@
 .profile__info {
   display: grid;
-  grid-template-areas:
-    "name buttonEdit"
-    "description .";
-  grid-template-columns: 1fr min-content;
-  column-gap: 18px;
-  align-items: baseline;
+  grid-template-columns: 1fr 24px;
+  gap: 16px 18px;
 }
-
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
   .profile__info {
-    width: 100%;
-    column-gap: 10px;
+    grid-template-columns: 210px 18px;
+    gap: 14px 0;
+    justify-content: center;
+    margin-bottom: 36px;
+    align-items: center;
   }
-
 }

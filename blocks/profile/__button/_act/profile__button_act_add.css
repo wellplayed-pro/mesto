@@ -1,16 +1,22 @@
 .profile__button_act_add {
-  justify-self: flex-end;
-  margin-left: auto;
-  width: 150px;
+  display: flex;
   height: 50px;
-  background-image: url("../../../../images/plus.svg");
-  background-size: 22px;
+  width: 150px;
   border: 2px solid #fff;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+.profile__button_act_add:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
   .profile__button_act_add {
-    width: 100%;
-    margin-top: 36px;
+    position: relative;
+    width: 282px;
+    margin: 0;
   }
 }

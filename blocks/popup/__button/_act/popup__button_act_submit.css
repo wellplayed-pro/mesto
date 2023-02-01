@@ -9,8 +9,9 @@
   box-shadow: none;
   border: none;
   cursor: pointer;
-  padding: 14px 125px;
+  padding: 14px 132px;
   margin-top: 47px;
+  justify-content: center;
 }
 
 @media (max-width: 535px) {
@@ -20,6 +21,7 @@
     line-height: 17px;
     padding: 14px 82px;
     margin-top: 44px;
+    
   }
 }
 

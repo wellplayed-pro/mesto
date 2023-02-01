@@ -1,8 +1,26 @@
 .profile__button_act_edit {
-  width: 24px;
-  height: 24px;
-  background-image: url('../../../../images/editButton.svg');
-  background-size: 10px;
-  border: 1px solid #fff;
-  grid-area: buttonEdit;
-}
+    height: 24px;
+    width: 24px;
+    align-self: end;
+    margin-bottom: 8px;
+    background-image: url(../../../../images/editButton.svg);
+    border: none;
+    outline: none;
+    background-color: transparent;
+    background-size: contain;
+  }
+  .profile__button_act_edit:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 1000px) {
+    .profile__button_act_edit {
+      height: 18px;
+      width: 18px;
+      justify-self: center;
+      margin-bottom: 4px;
+      right: 20px;
+      top: 3px;
+      padding: 0;
+    }
+  }

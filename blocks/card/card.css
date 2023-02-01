@@ -12,7 +12,7 @@
     'title like';
 }
 @media (min-width: 320px) {
-  .elements {
+  .card {
     max-width: fit-content;
   }
 }
