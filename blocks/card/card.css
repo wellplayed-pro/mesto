@@ -1,18 +1,12 @@
 .card {
-  width: 100%;
-  min-height: 361px;
-  border-radius: 10px;
+  position: relative;
   background-color: #fff;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-rows: min-content 1fr;
-  grid-template-columns: 1fr min-content;
-  grid-template-areas:
-    'picture picture'
-    'title like';
+  border-radius: 10px;
+  max-width: 282px;
 }
-@media (min-width: 320px) {
+
+@media screen and (max-width: 1000px) {
   .card {
-    max-width: fit-content;
+    justify-self: center;
   }
 }

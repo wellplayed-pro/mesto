@@ -1,14 +1,12 @@
-.3__like {
+.card__like {
   background-image: url('../../../images/like_disabled.svg');
   width: 22px;
   height: 19px;
   border: none;
-  background-color: #fff;
-  background-size: contain;
-  background-repeat: no-repeat;
-  grid-area: like;
-  justify-self: end;
-  margin: 31px 18px 0 0;
+  outline: none;
+  background-color: transparent;
+  background-size: auto;
+  cursor: pointer;
 }
 
 .card__like:hover {

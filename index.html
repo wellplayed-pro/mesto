@@ -8,79 +8,104 @@
   <title>Место: базовая функциональность</title>
 </head>
 
-<body class="body main">
-  <header class="header">
-    <div><img src='./images/logo.svg' alt="логотип Место"
-        class="header__logo" /></div>
-  </header>
+<body class="root">
+  <div class="page">
+    <header class="header root__section">
+      <div><img src='./images/logo.svg' alt="логотип Место"
+          class="header__logo" /></div>
+    </header>
 
-  <main class="main">
-    <section class="profile">
-      <div class="profile__column">
+    <main class="main">
+      <section class="profile root__section">
+        <div class="profile__column">
 
-        <img src="./images/kusto.svg" class="profile__logo"
-          alt="Картинка профиля">
-        <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__button_act_edit" type="button"></button>
-          <p class="profile__description">Исследователь океана</p>
+          <img src="./images/kusto.svg" class="profile__logo"
+            alt="Картинка профиля">
+          <div class="profile__info">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__button_act_edit" type="button"></button>
+            <p class="profile__description">Исследователь океана</p>
+          </div>
         </div>
-      </div>
-      <button class="profile__button_act_add" type="button"><img
-          src="./images/plus.svg" alt="плюс" class="profile__plus" />
+        <button class="profile__button_act_add" type="button"><img
+            src="./images/plus.svg" alt="плюс" class="profile__plus" />
 
-      </button>
-    </section>
+        </button>
+      </section>
 
-    <section class="elements">
-      <div class="card">
-        <img class="card__picture" src="./images/karachaevsk.jpg"
-          alt="Крепость в Карачаевске">
-        <h2 class="card__title">Карачаевск</h2>
-        <button class="button card__like" type="button"></button>
-      </div>
+      <section class="elements root__section">
+        <div class="card">
+          <img class="card__picture" src="./images/karachaevsk.jpg"
+            alt="Крепость в Карачаевске">
+          <div class="card__place-down">
+            <h3 class="card__title">Карачаевск</h2>
+              <div class="card__like-container">
+                <button class="card__like" type="button"></button>
+              </div>
+          </div>
+        </div>
 
-      <div class="card">
-        <img class="card__picture" src="./images/elbrus.jpg"
-          alt="Гора Эльбрус в тумане">
-        <h2 class="card__title">Гора Эльбрус</h2>
-        <button class="button card__like" type="button"></button>
-      </div>
+        <div class="card">
+          <img class="card__picture" src="./images/elbrus.jpg"
+            alt="Гора Эльбрус в тумане">
+            <div class="card__place-down">
+              <h3 class="card__title">Гора Эльбрус</h2>
+                <div class="card__like-container">
+                  <button class="card__like" type="button"></button>
+                </div>
+            </div>
+          </div>
 
-      <div class="card">
-        <img class="card__picture" src="./images/dombay.jpg"
-          alt="Гора Эльбрус в тумане">
-        <h2 class="card__title">Домбай</h2>
-        <button class="button card__like" type="button"></button>
-      </div>
+        <div class="card">
+          <img class="card__picture" src="./images/dombay.jpg"
+            alt="Гора Эльбрус в тумане">
+            <div class="card__place-down">
+              <h3 class="card__title">Домбай</h2>
+                <div class="card__like-container">
+                  <button class="card__like" type="button"></button>
+                </div>
+            </div>
+          </div>
 
-      <div class="card">
-        <img class="card__picture" src="./images/karachaevsk.jpg"
-          alt="Крепость в Карачаевске">
-        <h2 class="card__title">Карачаевск</h2>
-        <button class="button card__like" type="button"></button>
-      </div>
+        <div class="card">
+          <img class="card__picture" src="./images/karachaevsk.jpg"
+            alt="Крепость в Карачаевске">
+            <div class="card__place-down">
+              <h3 class="card__title">Карачаевск</h2>
+                <div class="card__like-container">
+                  <button class="card__like" type="button"></button>
+                </div>
+            </div>
+          </div>
 
-      <div class="card">
-        <img class="card__picture" src="./images/dombay.jpg"
-          alt="Гора Эльбрус в тумане">
-        <h2 class="card__title">Домбай</h2>
-        <button class="button card__like" type="button"></button>
-      </div>
+        <div class="card">
+          <img class="card__picture" src="./images/dombay.jpg"
+            alt="Гора Эльбрус в тумане">
+            <div class="card__place-down">
+              <h3 class="card__title">Домбай</h2>
+                <div class="card__like-container">
+                  <button class="card__like" type="button"></button>
+                </div>
+            </div>
+          </div>
 
-      <div class="card">
-        <img class="card__picture" src="./images/elbrus.jpg"
-          alt="Гора Эльбрус в тумане">
-        <h2 class="card__title">Гора Эльбрус</h2>
-        <button class="button card__like" type="button"></button>
-      </div>
-    </section>
+        <div class="card">
+          <img class="card__picture" src="./images/elbrus.jpg"
+            alt="Гора Эльбрус в тумане">
+            <div class="card__place-down">
+              <h3 class="card__title">Гора Эльбрус</h2>
+                <div class="card__like-container">
+                  <button class="card__like" type="button"></button>
+                </div>
+            </div>
+          </div>
+      </section>
 
-  </main>
-  <footer class="footer">
-    <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
-  </footer>
-
+    </main>
+    <footer class="footer root__section">
+      <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+    </footer>
+  </div>
   <div class="popup">
     <div class="popup__container">
       <button class="popup__button popup__button_act_exit" type="button"
