@@ -1,4 +1,4 @@
-.profile__button_act_add {
+.profile__button-add {
   display: flex;
   height: 50px;
   width: 150px;
@@ -8,13 +8,13 @@
   justify-content: center;
   background-color: transparent;
 }
-.profile__button_act_add:hover {
+.profile__button-add:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 1000px) {
-  .profile__button_act_add {
+  .profile__button-add {
     position: relative;
     width: 282px;
     margin: 0;
