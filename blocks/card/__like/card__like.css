@@ -7,11 +7,16 @@
   background-color: transparent;
   background-size: auto;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
+  align-items: center;
+  margin-right: 20px;
 }
 
 .card__like:hover {
   opacity: .5;
-  background-image: url('../../../images/like_hover.svg');
 }
 
 .card__like:active {

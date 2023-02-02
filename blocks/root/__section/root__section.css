@@ -8,7 +8,7 @@
 }
 @media screen and (max-width: 720px) {
   .root__section {
-    width: 282px;
+    width: 100%;
     margin-left: 19px;
     margin-right: 19px;
   }
