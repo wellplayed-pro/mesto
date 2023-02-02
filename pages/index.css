@@ -3,7 +3,6 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/root/root.css);
 
-
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
@@ -15,7 +14,6 @@
 @import url(../blocks/profile/__button-edit/profile__button-edit.css);
 @import url(../blocks/profile/__button-add/profile__button-add.css);
 @import url(../blocks/profile/__column/profile__column.css);
-
 
 @import url(../blocks/elements/elements.css);
 
