@@ -13,6 +13,7 @@
   margin-left: 15px;
   align-items: center;
   margin-right: 20px;
+  background-repeat: no-repeat;
 }
 
 .card__like:hover {
