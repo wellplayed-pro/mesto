@@ -43,7 +43,7 @@
     <div class="popup__container">
       <button class="popup__button popup__button_act_exit" type="button"
         value="close">Закрыть</button>
-      <form method="post" name="form-popup" class="form-popup">
+      <form method="post" name="form-popup-profile" class="form-popup-profile">
         <h2 class="popup__title">Редактировать профиль</h2>
         <input name="name" class="popup__input popup__input_type_name"
           type="text" placeholder="Имя">
@@ -54,15 +54,32 @@
       </form>
     </div>
   </div>
-  
 
-    <div class="popup" id="popup-show-photo">
-      <figure class="popup__background">
-        <button type="button" class="popup__button_act_exit"></button>
-        <img class="popup__photo" src="#" alt=""/>
+  <div class="popup" id="popup-add-photo">
+    <div class="popup__container">
+      <button class="popup__button popup__button_act_exit" type="button"
+        value="close">Закрыть</button>
+      <form method="post" name="form-popup" class="form-popup-photo">
+        <h2 class="popup__title">Новое место</h2>
+        <input name="title" class="popup__input popup__input_type_title" type="text"
+          placeholder="Название">
+        <input name="link" class="popup__input popup__input_type_link" type="url"
+          placeholder="Ссылка на картинку">
+        <button class="popup__button popup__button_act_submit" id="button-add-photo" type="submit"
+          value="save">Создать</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="popup" id="popup-show-photo">
+    <figure class="popup__background">
+      <button class="popup__button popup__button_act_exit" type="button"
+        value="close">Закрыть</button>
+        <img class="popup__photo" src="#" alt="" />
         <figcaption class="popup__caption"></figcaption>
-      </figure>
-
+    </figure>
+  </div>
 
 
   <template id="card">

@@ -3,13 +3,17 @@ let buttonEdit = document.querySelector('.profile__button-edit');
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
 let buttonExit = document.querySelector('.popup__button_act_exit');
-let formEl = document.querySelector('.form-popup');
+let formEl = document.querySelector('.form-popup-profile');
 let nameInput = formEl.querySelector('.popup__input_type_name');
 let jobInput = formEl.querySelector('.popup__input_type_job');
 
+function popupOpen() {
+  popup.classList.add('popup_opened');
+}
+
 
 function popupOpenProfile() {
-  popup.classList.add('popup_opened');
+  popupOpen();
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
 }
@@ -31,10 +35,14 @@ buttonExit.addEventListener('click', popupClose);
 formEl.addEventListener('submit', handleFormSubmit);
 
 
+let buttonAdd = document.querySelector('.profile__button-add');
+let titleInput = formEl.querySelector('.popup__input_type_title');
+let linkInput = formEl.querySelector('.popup__input_type_link');
 
 
-const cardsList = document.querySelector('.elements');
-const cardTemplate = document.querySelector('#card').content;
+buttonAdd.addEventListener('click', popupAddPhoto);
+
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -62,9 +70,12 @@ const initialCards = [
   }
 ];
 
-const popupImage = document.querySelector('#popup-show-photo').content;
-const imageLink = document.querySelector('.popup__photo');
-const imageCaption = document.querySelector('.popup__caption');
+const cardsList = document.querySelector('.elements');
+const cardTemplate = document.querySelector('#card').content;
+const showImagePopup = document.querySelector('#popup-show-photo');
+showImagePopup.querySelector('.popup__button_act_exit').addEventListener('click', () => {
+  showImagePopup.classList.remove('popup_opened')
+})
 
 initialCards.forEach(function (element) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -73,16 +84,13 @@ initialCards.forEach(function (element) {
 
   cardElement.querySelector(".card__delete").addEventListener('click', (evt) => { evt.target.closest('.card').remove(); });
 
-  cardElement.querySelector(".card__like").addEventListener('click', (evt) => {   evt.target.classList.toggle('card__like_active');});
+  cardElement.querySelector(".card__like").addEventListener('click', (evt) => { evt.target.classList.toggle('card__like_active'); });
 
-  cardElement.querySelector('.card__picture').addEventListener('click', (evt) => {
-    evt.popupImage.classList.add('popup_opened');
-    imageCaption.textContent = element.name;
-    imageLink.src = element.link;
-    ;});
-  
-
+  cardElement.querySelector('.card__picture').addEventListener('click', () => {
+    showImagePopup.querySelector('.popup__photo').src = element.link;
+    showImagePopup.querySelector('.popup__caption').textContent = element.name;
+    showImagePopup.classList.add('popup_opened');
+  });
 
   cardsList.append(cardElement);
 });
-
