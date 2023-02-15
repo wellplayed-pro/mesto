@@ -7,40 +7,48 @@ let formEl = document.querySelector('.form-popup-profile');
 let nameInput = formEl.querySelector('.popup__input_type_name');
 let jobInput = formEl.querySelector('.popup__input_type_job');
 
-function popupOpen() {
-  popup.classList.add('popup_opened');
+function tooglePopupVisibility() {
+  popup.classList.toggle('popup_opened');
 }
 
 
 function popupOpenProfile() {
-  popupOpen();
+  tooglePopupVisibility(formEl);
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
 }
 
 
-function popupClose() {
-  popup.classList.remove('popup_opened');
-}
-
 function handleFormSubmit(evt) {
   evt.preventDefault();;
   profileDescription.textContent = jobInput.value;
   profileName.textContent = nameInput.value;
-  popupClose();
+  tooglePopupVisibility(formEl);
 }
 
 buttonEdit.addEventListener('click', popupOpenProfile);
-buttonExit.addEventListener('click', popupClose);
+buttonExit.addEventListener('click', tooglePopupVisibility);
 formEl.addEventListener('submit', handleFormSubmit);
 
-
 let buttonAdd = document.querySelector('.profile__button-add');
-let titleInput = formEl.querySelector('.popup__input_type_title');
-let linkInput = formEl.querySelector('.popup__input_type_link');
+let formAddPhoto = document.querySelector('.form-popup-photo'); 
+let titleInput = formAddPhoto.querySelector('.popup__input_type_title');
+let linkInput = formAddPhoto.querySelector('.popup__input_type_link');
 
 
-buttonAdd.addEventListener('click', popupAddPhoto);
+function popupOpenAddPhoto() {
+  tooglePopupVisibility(formAddPhoto);
+}
+function handleFormSubmit(evt) {
+  evt.preventDefault();;
+  linkInput.textContent = jobInput.value;
+  titleInput.textContent = nameInput.value;
+  tooglePopupVisibility(formAddPhoto);
+}
+
+buttonAdd.addEventListener('click', popupOpenAddPhoto);
+formAddPhoto.addEventListener('submit', handleFormSubmit);
+
 
 
 const initialCards = [
@@ -74,7 +82,7 @@ const cardsList = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#card').content;
 const showImagePopup = document.querySelector('#popup-show-photo');
 showImagePopup.querySelector('.popup__button_act_exit').addEventListener('click', () => {
-  showImagePopup.classList.remove('popup_opened')
+  tooglePopupVisibility(showImagePopup)
 })
 
 initialCards.forEach(function (element) {
@@ -89,7 +97,7 @@ initialCards.forEach(function (element) {
   cardElement.querySelector('.card__picture').addEventListener('click', () => {
     showImagePopup.querySelector('.popup__photo').src = element.link;
     showImagePopup.querySelector('.popup__caption').textContent = element.name;
-    showImagePopup.classList.add('popup_opened');
+    tooglePopupVisibility(showImagePopup);
   });
 
   cardsList.append(cardElement);
