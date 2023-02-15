@@ -28,3 +28,44 @@ function handleFormSubmit(evt) {
 buttonEdit.addEventListener ('click', popupOpen);
 buttonExit.addEventListener ('click', popupClose);
 formEl.addEventListener ('submit', handleFormSubmit);
+
+
+
+
+const cardsList = document.querySelector('.elements');
+const cardTemplate = document.querySelector('.card').content;
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+
+initialCards.forEach(function (element) {
+  const cardElement = cardTemplate.cloneNode(true);
+  cardElement.querySelector('.card__picture').style.background= "url ={element.link}";
+  cardElement.querySelector('.card__title').textContent = element.name;
+
+  cardsList.append(cardElement);
+});
