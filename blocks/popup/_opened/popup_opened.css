@@ -1,5 +1,6 @@
 .popup_opened {
   display: flex;
+  visibility: visible;
   animation: fadeIn 1s;
   opacity: 1;
 }
