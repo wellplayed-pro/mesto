@@ -38,7 +38,8 @@
       <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup">
+
+  <div class="popup" id="popup-edit-profile">
     <div class="popup__container">
       <button class="popup__button popup__button_act_exit" type="button"
         value="close">Закрыть</button>
@@ -54,6 +55,16 @@
     </div>
   </div>
   
+
+    <div class="popup" id="popup-show-photo">
+      <figure class="popup__background">
+        <button type="button" class="popup__button_act_exit"></button>
+        <img class="popup__photo" src="#" alt=""/>
+        <figcaption class="popup__caption"></figcaption>
+      </figure>
+
+
+
   <template id="card">
     <div class="card">
       <button type="button" class="card__delete"></button>
