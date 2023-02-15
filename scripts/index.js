@@ -7,6 +7,7 @@ let formEl = document.querySelector('.form-popup');
 let nameInput = formEl.querySelector('.popup__input_type_name');
 let jobInput = formEl.querySelector('.popup__input_type_job');
 
+
 function popupOpen() {
   popup.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
@@ -33,7 +34,7 @@ formEl.addEventListener ('submit', handleFormSubmit);
 
 
 const cardsList = document.querySelector('.elements');
-const cardTemplate = document.querySelector('.card').content;
+const cardTemplate = document.querySelector('#card').content;
 const initialCards = [
   {
     name: 'Архыз',
@@ -64,8 +65,16 @@ const initialCards = [
 
 initialCards.forEach(function (element) {
   const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.card__picture').style.background= "url ={element.link}";
+  cardElement.querySelector('.card__picture').style.backgroundImage=`url(${element.link})`;
   cardElement.querySelector('.card__title').textContent = element.name;
 
   cardsList.append(cardElement);
 });
+
+let buttonDelete = document.querySelectorAll('.card__delete');
+
+const cardDelete = (evt) => {
+  evt.target.closest('.card').remove();
+}
+
+buttonDelete.addEventListener ('click', cardDelete);
