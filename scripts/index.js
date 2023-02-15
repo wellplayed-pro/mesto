@@ -6,9 +6,12 @@ function closePopup(targetPopup) {
   targetPopup.classList.remove("popup_opened");
 }
 
-function addCloseOnClickListner(targetPopup) {
-  targetPopup.querySelector(".popup__button_act_exit").addEventListener("click", () => closePopup(targetPopup));
-}
+const closeButtons = document.querySelectorAll('.popup__button_act_exit');
+//крутое решение по поиску крестиков:)
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
 
 // edit profile
 const buttonEdit = document.querySelector(".profile__button-edit");
@@ -16,11 +19,10 @@ const profileName = document.querySelector(".profile__name");
 
 const profileDescription = document.querySelector(".profile__description");
 const editProfilePopup = document.querySelector("#popup-edit-profile");
-addCloseOnClickListner(editProfilePopup);
 
-const formEl = document.querySelector(".form-popup-profile");
-const nameInput = formEl.querySelector(".popup__input_type_name");
-const jobInput = formEl.querySelector(".popup__input_type_job");
+const profileForm = document.forms["form-popup-profile"];
+const nameInput = profileForm.querySelector(".popup__input_type_name");
+const jobInput = profileForm.querySelector(".popup__input_type_job");
 
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
@@ -36,39 +38,51 @@ function updateProfile(evt) {
   closePopup(editProfilePopup);
 }
 
-formEl.addEventListener("submit", updateProfile);
+profileForm.addEventListener("submit", updateProfile);
 
 //  add place in template
 const cardTemplate = document.querySelector("#card").content;
 const cardsList = document.querySelector(".elements");
-function addPlaceInTemplate(element) {
+
+
+
+function createCard(item) {
 
   const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector(".card__picture").style.backgroundImage = `url(${element.link})`;
-  cardElement.querySelector(".card__title").textContent = element.name;
-
+  const cardPicture = cardElement.querySelector(".card__picture");
+  cardPicture.style.backgroundImage = `url(${item.link})`;
+  
+  cardElement.querySelector(".card__title").textContent = item.name;
+  
   cardElement.querySelector(".card__delete").addEventListener("click", (evt) => {
-      evt.target.closest(".card").remove();
-    });
+    evt.target.closest(".card").remove();
+  });
 
   cardElement.querySelector(".card__like").addEventListener("click", (evt) => {
     evt.target.classList.toggle("card__like_active");
   });
 
-  cardElement.querySelector(".card__picture").addEventListener("click", () => {
-    showImagePopup.querySelector(".popup__photo").src = element.link;
-    showImagePopup.querySelector(".popup__caption").textContent = element.name;
+  cardPicture.addEventListener("click", () => {
+    const popupPhoto = showImagePopup.querySelector(".popup__photo");
+    popupPhoto.src = item.link;
+    popupPhoto.alt = item.name;
+    showImagePopup.querySelector(".popup__caption").textContent = item.name;
     openPopup(showImagePopup);
   });
+  return cardElement
+}
 
+
+function addPlaceInTemplate(element) {
+  const cardElement = createCard(element);
   cardsList.prepend(cardElement);
 }
 
+
 // add new place
 const addButton = document.querySelector(".profile__button-add");
-const addPlaceForm = document.querySelector(".form-popup-photo");
+const addPlaceForm = document.forms["form-popup-photo"];
 const addPlacePopup = document.querySelector("#popup-add-photo")
-addCloseOnClickListner(addPlacePopup);
 
 const inputTitle = addPlaceForm.querySelector(".popup__input_type_title");
 const inputLink = addPlaceForm.querySelector(".popup__input_type_link");
@@ -79,6 +93,7 @@ function addNewPlace(evt) {
     link: inputLink.value,
     name: inputTitle.value
   })
+  evt.target.reset();
   closePopup(addPlacePopup);
 }
 
@@ -114,9 +129,6 @@ const initialCards = [
 ];
 
 const showImagePopup = document.querySelector("#popup-show-photo");
-addCloseOnClickListner(showImagePopup);
 
 
-initialCards.forEach(function (element) {
-  addPlaceInTemplate(element);
-});
+initialCards.forEach(addPlaceInTemplate);
