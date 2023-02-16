@@ -14,7 +14,7 @@ closeButtons.forEach((button) => {
 });
 
 // edit profile
-const buttonEdit = document.querySelector(".profile__button-edit");
+const editProfileButton = document.querySelector(".profile__button-edit");
 const profileName = document.querySelector(".profile__name");
 
 const profileDescription = document.querySelector(".profile__description");
@@ -29,7 +29,8 @@ function openProfilePopup() {
   jobInput.value = profileDescription.textContent;
   openPopup(editProfilePopup);
 }
-buttonEdit.addEventListener("click", openProfilePopup);
+
+editProfileButton.addEventListener("click", openProfilePopup);
 
 function updateProfile(evt) {
   evt.preventDefault();
@@ -40,20 +41,25 @@ function updateProfile(evt) {
 
 profileForm.addEventListener("submit", updateProfile);
 
+// show image popup
+const showImagePopup = document.querySelector("#popup-show-photo");
+const showImagePopupPhoto = showImagePopup.querySelector(".popup__photo");
+const showImagePopupCaption = showImagePopup.querySelector(".popup__caption");
+function showImagePopupWithPlace(place) {
+  showImagePopupPhoto.src = place.link;
+  showImagePopupPhoto.alt = place.name;
+  showImagePopupCaption.textContent = place.name;
+  openPopup(showImagePopup);
+}
+
 //  add place in template
 const cardTemplate = document.querySelector("#card").content;
-const cardsList = document.querySelector(".elements");
-
-
-
-function createCard(item) {
+function createCard(place) {
 
   const cardElement = cardTemplate.cloneNode(true);
-  const cardPicture = cardElement.querySelector(".card__picture");
-  cardPicture.style.backgroundImage = `url(${item.link})`;
-  
-  cardElement.querySelector(".card__title").textContent = item.name;
-  
+
+  cardElement.querySelector(".card__title").textContent = place.name;
+
   cardElement.querySelector(".card__delete").addEventListener("click", (evt) => {
     evt.target.closest(".card").remove();
   });
@@ -62,22 +68,21 @@ function createCard(item) {
     evt.target.classList.toggle("card__like_active");
   });
 
+  const cardPicture = cardElement.querySelector(".card__picture");
+  cardPicture.style.backgroundImage = `url(${place.link})`;
   cardPicture.addEventListener("click", () => {
-    const popupPhoto = showImagePopup.querySelector(".popup__photo");
-    popupPhoto.src = item.link;
-    popupPhoto.alt = item.name;
-    showImagePopup.querySelector(".popup__caption").textContent = item.name;
-    openPopup(showImagePopup);
+    showImagePopupWithPlace(place)
   });
+
   return cardElement
 }
 
+const cardsList = document.querySelector(".elements");
 
 function addPlaceInTemplate(element) {
   const cardElement = createCard(element);
   cardsList.prepend(cardElement);
 }
-
 
 // add new place
 const addButton = document.querySelector(".profile__button-add");
@@ -127,8 +132,5 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-
-const showImagePopup = document.querySelector("#popup-show-photo");
-
 
 initialCards.forEach(addPlaceInTemplate);
