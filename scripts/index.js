@@ -1,13 +1,32 @@
+const popups = document.querySelectorAll('.popup');
+function closeAllPopups() {
+  popups.forEach(closePopup)
+}
+
+popups.forEach(popup => {
+  popup.addEventListener('click', () => closePopup(popup))
+
+  popup.querySelector(".popup__container")?.addEventListener('click', (evt) => {
+    evt.stopPropagation() // prevent close popup inside container
+  })
+})
+
+function onEscKeyPressed(event) {
+  if (event.key !== 'Escape') return
+  closeAllPopups()
+}
+
 function openPopup(targetPopup) {
   targetPopup.classList.add("popup_opened");
+  document.addEventListener('keydown', onEscKeyPressed)
 }
 
 function closePopup(targetPopup) {
   targetPopup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', onEscKeyPressed)
 }
 
 const closeButtons = document.querySelectorAll('.popup__button_act_exit');
-//крутое решение по поиску крестиков:)
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
