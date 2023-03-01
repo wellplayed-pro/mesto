@@ -46,9 +46,11 @@
       <form method="post" name="form-popup-profile" class="form-popup-profile">
         <h2 class="popup__title">Редактировать профиль</h2>
         <input name="name" class="popup__input popup__input_type_name"
-          type="text" placeholder="Имя">
+          type="text" placeholder="Имя"  minlength="2"maxlength="40" required>
+          <span class="popup__input-error name-input-error"></span>
         <input name="job" class="popup__input popup__input_type_job" type="text"
-          placeholder="Описание">
+          placeholder="Описание" minlength="2" maxlength="200" required>
+          <span class="popup__input-error job-input-error"></span>
         <button class="popup__button popup__button_act_submit" type="submit"
           value="save">Сохранить</button>
       </form>
@@ -62,9 +64,11 @@
       <form method="post" name="form-popup-photo" class="form-popup-photo">
         <h2 class="popup__title">Новое место</h2>
         <input name="title" class="popup__input popup__input_type_title" type="text"
-          placeholder="Название">
+          placeholder="Название" minlength="2" maxlength="30" required>
+        <span class="popup__input-error title-input-error"></span>
         <input name="link" class="popup__input popup__input_type_link" type="url"
-          placeholder="Ссылка на картинку">
+          placeholder="Ссылка на картинку" required>
+          <span class="popup__input-error link-input-error"></span>
         <button class="popup__button popup__button_act_submit" id="button-add-photo" type="submit"
           value="save">Создать</button>
       </form>
