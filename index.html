@@ -45,10 +45,10 @@
         value="close">Закрыть</button>
       <form method="post" name="form-popup-profile" class="form-popup-profile form-popup" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input name="name" class="popup__input popup__input_type_name"
+        <input name="name" class="popup__input popup__input_type_name" id="input-name"
           type="text" placeholder="Имя"  minlength="2"maxlength="40" required>
           <span id="input-name-error" class="popup__error"></span>
-        <input name="job" class="popup__input popup__input_type_job" type="text"
+        <input name="job" id="input-job" class="popup__input popup__input_type_job" type="text"
           placeholder="Описание" minlength="2" maxlength="200" required>
           <span id="input-job-error" class="popup__error"></span>
         <button class="popup__button popup__button_act_submit" type="submit"
@@ -63,10 +63,10 @@
         value="close">Закрыть</button>
       <form method="post" name="form-popup-photo" class="form-popup-photo form-popup" novalidate>
         <h2 class="popup__title">Новое место</h2>
-        <input name="title" class="popup__input popup__input_type_title" type="text"
+        <input name="title" id="input-title" class="popup__input popup__input_type_title" type="text"
           placeholder="Название" minlength="2" maxlength="30" required>
           <span id="input-title-error" class="popup__error"></span>
-        <input name="link" class="popup__input popup__input_type_link" type="url"
+        <input name="link" id="input-link"class="popup__input popup__input_type_link" type="url"
           placeholder="Ссылка на картинку" required>
           <span id="input-link-error" class="popup__error"></span>
         <button class="popup__button popup__button_act_submit" id="button-add-photo" type="submit"
