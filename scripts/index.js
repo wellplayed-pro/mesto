@@ -3,16 +3,19 @@ function closeAllPopups() {
   popups.forEach(closePopup)
 }
 
-popups.forEach(popup => {
-  popup.addEventListener('click', () => closePopup(popup))
-
-  popup.querySelector(".popup__container")?.addEventListener('click', (evt) => {
-    evt.stopPropagation() // prevent close popup inside container
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup_opened')) {
+          closePopup(popup)
+      }
+      if (evt.target.classList.contains('popup__close')) {
+        closePopup(popup)
+      }
   })
 })
 
-function onEscKeyPressed(event) {
-  if (event.key !== 'Escape') return
+function onEscKeyPressed(evt) {
+  if (evt.key !== 'Escape') return
   closeAllPopups()
 }
 
@@ -24,7 +27,6 @@ function openPopup(targetPopup) {
 function closePopup(targetPopup) {
   targetPopup.classList.remove("popup_opened");
   document.removeEventListener('keydown', onEscKeyPressed)
-  targetPopup.querySelector('.form-popup')?.reset()
 }
 
 const closeButtons = document.querySelectorAll('.popup__button_act_exit');
@@ -45,6 +47,7 @@ const nameInput = profileForm.querySelector(".popup__input_type_name");
 const jobInput = profileForm.querySelector(".popup__input_type_job");
 
 function openProfilePopup() {
+  profileForm.reset();
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
   openPopup(editProfilePopup);
@@ -118,7 +121,6 @@ function addNewPlace(evt) {
     link: inputLink.value,
     name: inputTitle.value
   })
-  evt.target.reset();
   closePopup(addPlacePopup);
 }
 

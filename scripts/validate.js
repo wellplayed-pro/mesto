@@ -28,8 +28,14 @@ const enableValidation = (config) => {
     form.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
+
+    const formInputs=form.querySelectorAll(config.inputSelector)
     form.addEventListener('reset', () => {
-      form.querySelectorAll('.popup__input').forEach(input => clearInputError(input, config))
+      formInputs.forEach(input => clearInputError(input, config))
+      setTimeout(() => {
+        toggleButton(form,config);
+      }, 0);
+      
     })
     form.addEventListener('input', () => {
       toggleButton(form, config);
@@ -50,11 +56,11 @@ const handleFormInput = (evt, config) => {
 }
 
 const toggleButton = (form, config) => {
-  const buttonSubmint = form.querySelector(config.submitButtonSelector);
+  const buttonSubmit = form.querySelector(config.submitButtonSelector);
   const isFormValid = form.checkValidity();
 
-  buttonSubmint.disabled = !isFormValid;
-  buttonSubmint.classList.toggle('popup__button_act_submit_disabled', !isFormValid);
+  buttonSubmit.disabled = !isFormValid;
+  buttonSubmit.classList.toggle(config.inactiveButtonClass, !isFormValid);
 }
 
 const addInputListners = (form, config) => {
