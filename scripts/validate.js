@@ -7,6 +7,20 @@ const formValidation = {
   errorClass: 'popup__error_visible'
 }
 
+function clearInputError(input, config) {
+  const inputId = input.id;
+  const errorElement = document.querySelector(`#${inputId}-error`);
+  input.classList.remove(config.inputErrorClass)
+  errorElement.textContent = '';
+}
+
+function setInputError(input, errorMsg, config) {
+  const inputId = input.id;
+  const errorElement = document.querySelector(`#${inputId}-error`);
+  input.classList.add(config.inputErrorClass);
+  errorElement.textContent = errorMsg;
+}
+
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
 
@@ -14,6 +28,9 @@ const enableValidation = (config) => {
     form.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
+    form.addEventListener('reset', () => {
+      form.querySelectorAll('.popup__input').forEach(input => clearInputError(input, config))
+    })
     form.addEventListener('input', () => {
       toggleButton(form, config);
     });
@@ -25,15 +42,10 @@ const enableValidation = (config) => {
 
 const handleFormInput = (evt, config) => {
   const input = evt.target;
-  const inputId = input.id;
-  const errorElement = document.querySelector(`#${inputId}-error`);
-console.log(errorElement);
   if (input.validity.valid) {
-    input.classList.remove(config.inputErrorClass)
-    errorElement.textContent = '';
+    clearInputError(input, config)
   } else {
-    input.classList.add(config.inputErrorClass);
-    errorElement.textContent = input.validationMessage;
+    setInputError(input, input.validationMessage, config)
   }
 }
 

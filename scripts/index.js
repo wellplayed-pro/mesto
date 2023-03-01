@@ -24,6 +24,7 @@ function openPopup(targetPopup) {
 function closePopup(targetPopup) {
   targetPopup.classList.remove("popup_opened");
   document.removeEventListener('keydown', onEscKeyPressed)
+  targetPopup.querySelector('.form-popup')?.reset()
 }
 
 const closeButtons = document.querySelectorAll('.popup__button_act_exit');
