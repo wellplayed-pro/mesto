@@ -27,7 +27,7 @@ const handleFormInput = (evt, config) => {
   const input = evt.target;
   const inputId = input.id;
   const errorElement = document.querySelector(`#${inputId}-error`);
-
+console.log(errorElement);
   if (input.validity.valid) {
     input.classList.remove(config.inputErrorClass)
     errorElement.textContent = '';
