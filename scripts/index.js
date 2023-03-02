@@ -8,7 +8,7 @@ popups.forEach((popup) => {
       if (evt.target.classList.contains('popup_opened')) {
           closePopup(popup)
       }
-      if (evt.target.classList.contains('popup__close')) {
+      if (evt.target.classList.contains('popup__button_act_exit')) {
         closePopup(popup)
       }
   })
@@ -28,12 +28,6 @@ function closePopup(targetPopup) {
   targetPopup.classList.remove("popup_opened");
   document.removeEventListener('keydown', onEscKeyPressed)
 }
-
-const closeButtons = document.querySelectorAll('.popup__button_act_exit');
-closeButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-});
 
 // edit profile
 const editProfileButton = document.querySelector(".profile__button-edit");
@@ -121,6 +115,7 @@ function addNewPlace(evt) {
     link: inputLink.value,
     name: inputTitle.value
   })
+  evt.target.reset(); 
   closePopup(addPlacePopup);
 }
 
