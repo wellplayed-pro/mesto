@@ -1,3 +1,4 @@
+import Card from './Card.js';
 const popups = document.querySelectorAll('.popup');
 function closeAllPopups() {
   popups.forEach(closePopup)
