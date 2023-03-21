@@ -1,4 +1,6 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const popups = document.querySelectorAll('.popup');
 function closeAllPopups() {
   popups.forEach(closePopup)
