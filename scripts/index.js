@@ -72,13 +72,19 @@ function showImagePopupWithPlace(place) {
   openPopup(showImagePopup);
 }
 
-//  add place in template
 const cardTemplate = document.querySelector("#card").content;
 const cardsList = document.querySelector(".elements");
 
+// create card
+function createCard(item) {
+  const card = new Card(item, cardTemplate, () => showImagePopupWithPlace(item));
+  return card.generateCard();
+}
+
+//  add place in template
 function addPlaceInTemplate(element) {
-  const cardElement = new Card(element, cardTemplate, () => showImagePopupWithPlace(element));
-  cardsList.prepend(cardElement.createCard());
+  const cardElement = createCard(element)
+  cardsList.prepend(cardElement);
 }
 
 // add new place
@@ -95,7 +101,7 @@ function addNewPlace(evt) {
     link: inputLink.value,
     name: inputTitle.value
   })
-  evt.target.reset();
+  addPlaceForm.clearValidationForm();
   closePopup(addPlacePopup);
 }
 
@@ -139,6 +145,19 @@ const validationSettings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 }
+// получение экземпляров класса
+const formValidators = {}
 
-const forms = [...document.querySelectorAll('.form-popup')].map(form => new FormValidator(validationSettings, form));
-forms.forEach(form => form.enableValidation())
+// Включение валидации
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, config)
+// получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name')
+   // вот тут в объект записываем под именем формы
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+enableValidation(validationSettings);

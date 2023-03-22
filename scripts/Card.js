@@ -15,7 +15,7 @@ class Card {
   };
 
   /**Создаем карточку */
-  createCard() {
+  generateCard() {
     this._cardElement = this._getTemplate();
 
     const cardElementTitle = this._cardElement.querySelector('.card__title');
@@ -32,12 +32,12 @@ class Card {
   };
 
   /**Лайкаем карточку */
-  _likeCard() {
+  _toggleLike() {
     this._cardElementLike.classList.toggle('card__like_active');
   };
 
   /** Удаляем карточку */
-  _deleteCard(evt) {
+  _deleteCard = (evt) => {
     evt.target.closest('.card').remove()
     this._cardElement = null;
   };
@@ -46,7 +46,7 @@ class Card {
   _setEventListeners() {
 
     const cardElementDelete = this._cardElement.querySelector('.card__delete');
-    this._cardElementLike.addEventListener('click', () => this._likeCard());
+    this._cardElementLike.addEventListener('click', () => this._toggleLike());
     cardElementDelete.addEventListener('click', this._deleteCard);
 
     this._cardPicture.addEventListener('click', () =>
