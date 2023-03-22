@@ -5,7 +5,6 @@ class FormValidator {
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
-    this._formSelector = config.formSelector;
     this._form = form;
     this._buttonSubmit = this._form.querySelector(this._submitButtonSelector);
   }
@@ -17,7 +16,7 @@ class FormValidator {
 
   /**Добавить класс ошибки */
   _setInputError(inputElement) {
-    const errorElement = this._form.querySelector(`#${inputId}-error`);
+    const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     inputElement.classList.add(this._errorClass);
     errorElement.textContent = inputElement.validationMessage;
@@ -25,7 +24,7 @@ class FormValidator {
 
   /**Убрать класс ошибки */
   _hideInputError(inputElement) {
-    const errorElement = this._form.querySelector(`#${inputId}-error`);
+    const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._errorClass);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.textContent = "";
@@ -34,7 +33,7 @@ class FormValidator {
   /**Проверить валидность поля */
   _handleFormInput(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(inputElement);
+      this._setInputError(inputElement);
     } else {
       this._hideInputError(inputElement);
     }
