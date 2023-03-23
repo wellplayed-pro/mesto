@@ -6,6 +6,9 @@ function closeAllPopups() {
   popups.forEach(closePopup)
 }
 
+// Перечень всех валидаторов форм 
+const formValidators = {}
+
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
@@ -101,8 +104,10 @@ function addNewPlace(evt) {
     link: inputLink.value,
     name: inputTitle.value
   })
-  addPlaceForm.clearValidationForm();
   closePopup(addPlacePopup);
+  inputLink.value = ""
+  inputTitle.value = ""
+  formValidators[addPlaceForm.getAttribute('name')].clearValidationForm()
 }
 
 addButton.addEventListener("click", () => openPopup(addPlacePopup));
@@ -139,23 +144,22 @@ const initialCards = [
 initialCards.forEach(addPlaceInTemplate);
 
 const validationSettings = {
+  formSelector: '.form-popup',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button_act_submit',
   inactiveButtonClass: 'popup__button_act_submit_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 }
-// получение экземпляров класса
-const formValidators = {}
 
 // Включение валидации
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector))
   formList.forEach((formElement) => {
-    const validator = new FormValidator(formElement, config)
-// получаем данные из атрибута `name` у формы
+    const validator = new FormValidator(config, formElement)
+    // получаем данные из атрибута `name` у формы
     const formName = formElement.getAttribute('name')
-   // вот тут в объект записываем под именем формы
+    // вот тут в объект записываем под именем формы
     formValidators[formName] = validator;
     validator.enableValidation();
   });
