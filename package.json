@@ -1,0 +1,24 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "mesto PR8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wellplayed-pro/mesto.git"
+  },
+  "keywords": [
+    "yandex",
+    "mesto",
+    "js"
+  ],
+  "author": "Artem Khomutinnikov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wellplayed-pro/mesto/issues"
+  },
+  "homepage": "https://github.com/wellplayed-pro/mesto#readme"
+}
