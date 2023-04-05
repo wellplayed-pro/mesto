@@ -2,7 +2,7 @@ class UserInfo {
   constructor({ selectorUserName, selectorUserDescription, selectorUserLogo}) {
     this._profileName = document.querySelector(selectorUserName);
     this._profileDescription = document.querySelector(selectorUserDescription);
-    this._profileLogo = document.querySelector(selectorUserAvatar);
+    this._profileLogo = document.querySelector(selectorUserLogo);
   }
 
   /**Функция получения информации из профиля */
@@ -19,9 +19,9 @@ class UserInfo {
     this._profileDescription.textContent = description;
   }
 
-  /**Функция добавления ссылки на новую картинку аватара */
+  /**Функция добавления ссылки на новую картинку  */
   setUserLogo( url ) {
-    this._profileLogo.src = url.avatar
+    this._profileLogo.src = url.logo
   }
 
 };

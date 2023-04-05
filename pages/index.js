@@ -70,31 +70,52 @@ function updateProfile(evt) {
 
 profileForm.addEventListener("submit", updateProfile);
 
-// show image popup
-const showImagePopup = document.querySelector("#popup-show-photo");
-const showImagePopupPhoto = showImagePopup.querySelector(".popup__photo");
-const showImagePopupCaption = showImagePopup.querySelector(".popup__caption");
-function showImagePopupWithPlace(place) {
-  showImagePopupPhoto.src = place.link;
-  showImagePopupPhoto.alt = place.name;
-  showImagePopupCaption.textContent = place.name;
-  openPopup(showImagePopup);
-}
 
 const cardTemplate = document.querySelector("#card").content;
 const cardsList = document.querySelector(".elements");
 
-// create card
+
+//create popupWithImage 
+const cardImagePopup = new PopupWithImage('#popup-show-photo');
+
+
+// create card (need rework)
 function createCard(item) {
   const card = new Card(item, cardTemplate, () => showImagePopupWithPlace(item));
   return card.generateCard();
 }
 
-//  add place in template
-function addPlaceInTemplate(element) {
-  const cardElement = createCard(element)
-  cardsList.prepend(cardElement);
-}
+//create Section
+const cardsContainer = new Section({
+  renderer: (item, userID) => {
+    cardsContainer.addItem(createCard(item, userID));
+  },
+}, '.elements'
+);
+
+// Popup buttons
+const popupOpenEdit = document.querySelector('.profile__button-edit');
+const popupOpenAdd = document.querySelector('.profile__button-add');
+const popupOpenAvatar = document.querySelector('.profile__logo');
+let userCurrentId;
+
+//form profile 
+const userInfo = new UserInfo({
+  selectorUserName: '.profile__name',
+  selectorUserDescription: '.profile__name',
+  selectorUserLogo: '.profile__logo'
+})
+
+
+//openPopup edit profile
+popupOpenEdit.addEventListener('click', () => {
+  popupFormProfile.open();
+  popupFormProfile.setInputValues(userInfo.getUserInfo());
+  validatorForms['form-popup-profile'].clearValidationForm();
+});
+
+
+
 
 // add new place
 const addButton = document.querySelector(".profile__button-add");
@@ -120,43 +141,8 @@ addButton.addEventListener("click", () => openPopup(addPlacePopup));
 addPlaceForm.addEventListener("submit", addNewPlace);
 
 
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 initialCards.forEach(addPlaceInTemplate);
 
-const validationSettings = {
-  formSelector: '.form-popup',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button_act_submit',
-  inactiveButtonClass: 'popup__button_act_submit_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}
 
 // Включение валидации
 const enableValidation = (config) => {
