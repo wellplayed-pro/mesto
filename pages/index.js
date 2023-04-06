@@ -138,18 +138,6 @@ addPlaceForm.addEventListener("submit", addNewPlace);
 
 initialCards.forEach(addPlaceInTemplate);
 
-<<<<<<< HEAD:pages/index.js
-=======
-const validationSettings = {
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button_act_submit',
-  inactiveButtonClass: 'popup__button_act_submit_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}
-// получение экземпляров класса
-const formValidators = {}
->>>>>>> parent of 0ced6f4 (pr7-fix review):scripts/index.js
 
 // Включение валидации
 const enableValidation = (config) => {
