@@ -9,10 +9,10 @@ class PopupWithImage extends Popup {
 
   /**Открываем Popup с внесением данных */
   open(place) {
-    super.open();
     this._imgCard.src = place.link;
     this._imgCard.alt = place.name;
     this._nameCard.textContent = place.name
+    super.open();
   }
 
 };
