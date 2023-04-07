@@ -6,7 +6,7 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import {initialCards, validationSettings} from '../utils/utils.js';
-
+import './index.css'; // добавьте импорт главного файла стилей 
 
 // Перечень всех валидаторов форм 
 const formValidators = {}

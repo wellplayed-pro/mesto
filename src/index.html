@@ -4,21 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="./pages/index.css">
   <title>Место: базовая функциональность</title>
 </head>
 
 <body class="root">
   <div class="page">
     <header class="header">
-      <img src='./images/logo.svg' alt="логотип Место" class="header__logo" />
+      <img src="<%=require('./images/logo.svg')%>" alt="логотип Место" class="header__logo" />
     </header>
 
     <main class="main">
       <section class="profile">
         <div class="profile__column">
 
-          <img src="./images/kusto.svg" class="profile__logo"
+          <img src="<%=require('./images/kusto.svg')%>" class="profile__logo"
             alt="Картинка профиля">
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
