@@ -2,7 +2,7 @@ class Card {
   constructor(card, templateSelector, handleCardClick) {
     this._name = card.name;
     this._link = card.link;
-    this._templateSelector = templateSelector;
+    this._templateSelector = document.querySelector(templateSelector).content.querySelector('.card');
     this._handleCardClick = handleCardClick;
 
   };

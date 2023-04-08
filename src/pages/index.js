@@ -1,53 +1,39 @@
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from "../components/Section.js"
-import Popup from '../components/Popup.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
-import {initialCards, validationSettings} from '../utils/utils.js';
+import { initialCards, validationSettings } from '../utils/utils.js';
 import './index.css'; // добавьте импорт главного файла стилей 
 
 // Перечень всех валидаторов форм 
 const formValidators = {}
 
-
 // edit profile
 const editProfileButton = document.querySelector(".profile__button-edit");
 
-const editProfilePopup = new Popup("#popup-edit-profile");
-
-const profileForm = document.forms["form-popup-profile"];
-const nameInput = profileForm.querySelector(".popup__input_type_name");
-const jobInput = profileForm.querySelector(".popup__input_type_job");
 const userInfo = new UserInfo({ selectorUserName: ".profile__name", selectorUserDescription: ".profile__description" })
 
-function openProfilePopup() {
-  profileForm.reset();
-  const info = userInfo.getUserInfo()
-  nameInput.value = info.name;
-  jobInput.value = info.description;
-  editProfilePopup.open();
-}
-
-editProfileButton.addEventListener("click", openProfilePopup);
-
 function updateProfile(evt) {
-  evt.preventDefault();
-  userInfo.setUserInfo({ name: nameInput.value, description: jobInput.value })
+  userInfo.setUserInfo({ name: evt.name, description: evt.description })
   editProfilePopup.close();
 }
 
-profileForm.addEventListener("submit", updateProfile);
+const editProfilePopup = new PopupWithForm("#popup-edit-profile", { submitCallback: updateProfile });
+
+editProfileButton.addEventListener("click", () => {
+  editProfilePopup.setInputValues(userInfo.getUserInfo())
+  formValidators['form-popup-profile'].clearValidationForm()
+  editProfilePopup.open()
+});
 
 // show image popup
 const showImagePopup = new PopupWithImage("#popup-show-photo");
 
-const cardTemplate = document.querySelector("#card").content;
-
 // create card
 function createCard(item) {
-  const card = new Card(item, cardTemplate, (item) => showImagePopup.open(item));
+  const card = new Card(item, '#card', (item) => showImagePopup.open(item));
   return card.generateCard();
 }
 
@@ -67,8 +53,10 @@ function addNewPlace(place) {
 }
 
 const addPlacePopup = new PopupWithForm("#popup-add-photo", { submitCallback: addNewPlace })
-addPlacePopup.setEventListeners((evt) => formValidators[evt.target.getAttribute('name')].clearValidationForm());
-addButton.addEventListener("click", () => addPlacePopup.open());
+addButton.addEventListener("click", () => {
+  formValidators['form-popup-photo'].clearValidationForm()
+  addPlacePopup.open()
+});
 
 // Включение валидации
 const enableValidation = (config) => {

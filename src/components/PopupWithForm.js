@@ -4,13 +4,14 @@ class PopupWithForm extends Popup {
   constructor(selectorPopup, { submitCallback }) {
     super(selectorPopup);
     this._submitCallback = submitCallback;
-    this._formSubmit = this._popup.querySelector('.form-popup');
-    this._inputList = Array.from(this._formSubmit.querySelectorAll('.popup__input'));
-    this._buttonSubmit = this._formSubmit.querySelector('.popup__button_act_submit');
-    this._formSubmit.addEventListener('submit', (evt) => {
+    this._form = this._popup.querySelector('.form-popup');
+    this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
+    this._buttonSubmit = this._form.querySelector('.popup__button_act_submit');
+    this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submitCallback(this._getInputValues());
     })
+    this.setEventListeners()
   }
 
   /**Получаем значения input */
@@ -26,21 +27,15 @@ class PopupWithForm extends Popup {
   setInputValues = (data) => {
     this._inputList.forEach((input) => {
       input.value = data[input.name]
-    }); 
+    });
   }
 
   /**Закрываем и чистим */
   close() {
-    this._formSubmit.reset();
+    this._form.reset();
     super.close();
   }
 
-  /**Слушаем */
-  setEventListeners(listner) {
-    this._formSubmit.addEventListener('submit', (evt) => {
-      listner(evt)
-    })
-  }
 };
 
 export { PopupWithForm };
