@@ -15,16 +15,16 @@
 
     <main class="main">
       <section class="profile">
-        <div class="profile__column">
-
+        <div class="profile__avatar-edit">
           <img src="<%=require('./images/kusto.svg')%>" class="profile__logo"
             alt="Картинка профиля">
+          </div>
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button class="profile__button-edit" type="button"></button>
             <p class="profile__description">Исследователь океана</p>
           </div>
-        </div>
+        
         <button class="profile__button-add" type="button">
         </button>
       </section>
@@ -47,7 +47,7 @@
         <input name="name" class="popup__input popup__input_type_name" id="input-name"
           type="text" placeholder="Имя"  minlength="2"maxlength="40" required>
           <span id="input-name-error" class="popup__error"></span>
-        <input name="job" id="input-job" class="popup__input popup__input_type_job" type="text"
+        <input name="description" id="input-job" class="popup__input popup__input_type_job" type="text"
           placeholder="Описание" minlength="2" maxlength="200" required>
           <span id="input-job-error" class="popup__error"></span>
         <button class="popup__button popup__button_act_submit" type="submit"
@@ -84,7 +84,30 @@
     </figure>
   </div>
 
+<!-- Popup редактирования аватара -->
+<div class="popup popup_type_avatar">
+  <div class="popup__container">
+    <button aria-label="сlose" class="popup__button_act_exit" type="button"></button>
+    <h2 class="popup__title">Обновить аватар</h2>
+    <form class="popup__form popup__form_type_avatar" name="form-avatar" novalidate>
+      <input id="input-avatar" type="url" name="avatar" class="popup__input popup__input_type_link"
+      placeholder="Ссылка на аватар" required>
+      <span id="input-avatar-error" class="popup__error"></span>
+      <button class="popup__button popup__button_act_submit" type="submit">Сохранить</button>
+    </form>
+  </div>
+</div>
 
+  <!-- Popup подтверждения удаления -->
+  <div class="popup popup_type_delete">
+    <div class="popup__container">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button class="popup__button popup__button_act_submit" type="submit">Да</button>
+      <button aria-label="сlose" class="popup__button_act_exit" type="button"></button>
+    </div>
+  </div>
+
+  <!-- Шаблон карточки -->
   <template id="card">
     <div class="card">
       <button type="button" class="card__delete"></button>
@@ -93,6 +116,7 @@
         <h2 class="card__title"></h2>
         <div class="card__like-container">
           <button type="button" class="card__like"></button>
+          <span class="card__span"></span>
         </div>
       </div>
     </div>

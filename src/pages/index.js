@@ -4,7 +4,7 @@ import { Section } from "../components/Section.js"
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
-import { initialCards, validationSettings } from '../utils/utils.js';
+import { apiConfig, initialCards, validationSettings } from '../utils/utils.js';
 import './index.css'; // добавьте импорт главного файла стилей 
 
 // Перечень всех валидаторов форм 
@@ -14,7 +14,6 @@ const formValidators = {}
 const editProfileButton = document.querySelector(".profile__button-edit");
 
 const userInfo = new UserInfo({ selectorUserName: ".profile__name", selectorUserDescription: ".profile__description" })
-
 function updateProfile(evt) {
   userInfo.setUserInfo({ name: evt.name, description: evt.description })
   editProfilePopup.close();
