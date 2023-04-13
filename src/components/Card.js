@@ -1,5 +1,5 @@
 class Card {
-  constructor(card, templateSelector, handleCardClick) {
+  constructor({data, userId, templateSelector, handleCardClick, handleCardDelete, handleCardLike, handleCardDeleteLike}) {
     this._name = card.name;
     this._link = card.link;
     //this._templateSelector = document.querySelector(templateSelector).content.querySelector('.card');
@@ -97,15 +97,9 @@ renderCardLike(card) {
   /**Слушатели событий */
   _setEventListeners() {
 
-    const cardElementDelete = this._cardElement.querySelector('.card__delete');
-    this._cardElementLike.addEventListener('click', () => this._toggleLike());
-    cardElementDelete.addEventListener('click', this._deleteCard);
-
-    this._cardPicture.addEventListener('click', () =>
-      this._handleCardClick({
-        link: this._link,
-        name: this._name,
-      }));
+    this._cardElementLike.addEventListener('click', () => this.togleLike());
+    this._cardElementDel.addEventListener('click', () => this._handleCardDelete(this, this.idCard));
+    this._cardElementPhoto.addEventListener('click', () => this._handleCardClick());
   };
 };
 

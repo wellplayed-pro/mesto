@@ -5,7 +5,21 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { apiConfig, initialCards, validationSettings } from '../utils/utils.js';
+import { Api } from '../components/Api.js';
 import './index.css'; // добавьте импорт главного файла стилей 
+
+
+const api = new Api(apiConfig);
+Promise.all([api.getUserInfoApi(), api.getInitialCards()])
+.then(([resUser, resCard]) => {
+  userCurrentId = resUser._id;
+  userInfo.setUserInfo(resUser);
+  userInfo.setUserAvatar(resUser);
+  cardsContainer.renderItems(resCard, userCurrentId)
+})
+.catch((err) => alert(err))
+
+
 
 // Перечень всех валидаторов форм 
 const formValidators = {}
