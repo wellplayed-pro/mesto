@@ -5,8 +5,12 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { apiConfig, initialCards, validationSettings } from '../utils/utils.js';
 import { Api } from '../components/Api.js';
+=======
+import { initialCards, validationSettings } from '../utils/utils.js';
+>>>>>>> parent of a106e7f (first fix(work))
 =======
 import { initialCards, validationSettings } from '../utils/utils.js';
 >>>>>>> parent of a106e7f (first fix(work))
