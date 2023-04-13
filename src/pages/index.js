@@ -4,8 +4,12 @@ import { Section } from "../components/Section.js"
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
+<<<<<<< HEAD
 import { apiConfig, initialCards, validationSettings } from '../utils/utils.js';
 import { Api } from '../components/Api.js';
+=======
+import { initialCards, validationSettings } from '../utils/utils.js';
+>>>>>>> parent of a106e7f (first fix(work))
 import './index.css'; // добавьте импорт главного файла стилей 
 
 
@@ -28,6 +32,7 @@ const formValidators = {}
 const editProfileButton = document.querySelector(".profile__button-edit");
 
 const userInfo = new UserInfo({ selectorUserName: ".profile__name", selectorUserDescription: ".profile__description" })
+
 function updateProfile(evt) {
   userInfo.setUserInfo({ name: evt.name, description: evt.description })
   editProfilePopup.close();

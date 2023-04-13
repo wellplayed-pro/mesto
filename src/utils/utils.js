@@ -25,7 +25,7 @@ const initialCards = [
   },
 ];
 
- /** Валидация */
+// /** Валидация */
 
 const validationSettings = {
   formSelector: '.form-popup',
@@ -36,14 +36,5 @@ const validationSettings = {
   errorClass: 'popup__error_visible'
 }
 
-const apiConfig = {
-  url: 'https://mesto.nomoreparties.co/v1/cohort-64',
-  headers:{
-    'Content-Type': "application/json",
-    authorization: '45bc93fa-1246-4164-bef4-758a1c17ad4b'
-  }
-}
 
-
-
-export {initialCards, apiConfig, validationSettings};
+export {initialCards, validationSettings};
