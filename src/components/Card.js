@@ -1,21 +1,20 @@
+import { PopupWithRemoval } from "./PopupWithRemoval"
 class Card {
-  constructor({data, userId, templateSelector, handleCardClick, handleCardDelete, handleCardLike, handleCardDeleteLike}) {
+  constructor(card, templateSelector, handlers) {
     this._name = card.name;
     this._link = card.link;
-    //this._templateSelector = document.querySelector(templateSelector).content.querySelector('.card');
-    this._dataLikes = data.likes;
-    this.idCard = data._id;
-    this.cardData = data;
-    this._idUserCard = data.owner._id;
-    this._likesCounter = data.likes.length;
-    this._templateSelector = templateSelector;
-    this._handleCardClick = handleCardClick;
-    this._handleCardDelete = handleCardDelete;
-    this._putLike = handleCardLike;
-    this._removeLike = handleCardDeleteLike;
-    this._userId = userId;
+    this._likes = card.likes;
+    this._id = card._id;
+    this._isMine = card.isMine;
+    this._isLiked = card.isLiked;
 
+    this._templateSelector = document.querySelector(templateSelector).content.querySelector('.card');
+    this._handleCardClick = handlers.onClick;
+    this._handleDeleteClick = handlers.onDeleteClick;
+    this._handleSetLike = handlers.onSetLike;
+    this._handleDeleteLike = handlers.onDeleteLike;
 
+    this._cardLikeActiveClass = 'card__like_active';
   };
 
   /**Получаем шаблон */
@@ -29,20 +28,19 @@ class Card {
   generateCard() {
     this._cardElement = this._getTemplate();
 
-    this.cardElementTitle = this._cardElement.querySelector('.card__title');
-    this.cardElementTitle.textContent = this._name;
+    const cardElementTitle = this._cardElement.querySelector('.card__title');
+    cardElementTitle.textContent = this._name;
+
+
     this._cardPicture = this._cardElement.querySelector(".card__picture");
     this._cardPicture.style.backgroundImage = `url(${this._link})`;
     this._cardElementLike = this._cardElement.querySelector('.card__like');
-    this._cardElementDelete = this.cardElement.querySelector('.card__delete');
-    this._cardElementLikesCount = this.cardElement.querySelector('.card__span');
-    this.renderCardLike(this.cardData);
+    this._cardElementLikeCount = this._cardElement.querySelector('.card__like_count');
+    this._cardElementLikeCount.textContent = this._likes.length
 
-
-    //Проверка отображения корзины на карточке 
-    if (this._idUserCard !== this._userId) {
-      this._cardElementDelete.remove();
-    }
+    const cardElementDelete = this._cardElement.querySelector('.card__delete');
+    if (this._isMine) cardElementDelete.classList.add('visible')
+    if (this._isLiked) this._cardElementLike.classList.add(this._cardLikeActiveClass)
 
 
     this._setEventListeners();
@@ -50,56 +48,48 @@ class Card {
     return this._cardElement;
   };
 
-/** Функция проверки наличия лайка на карточке */
-likedCard() {
-  return this._dataLikes.some(like => like._id === this._userId)
-};
-
-/**Функция изменения установки и снятия лайка */
-toggleLike() {
-  if (this.likedCard()) {
-    this._removeLike(this.idCard);
-  } else {
-    this._putLike(this.idCard);
-  }
-}
-
-/**Функция общего отображения лайков и их колличества  */
-renderCardLike(card) {
-    this._dataLikes = card.likes;
-  if(this._dataLikes.length === 0) {
-    this._cardElementLikesCount.textContent = '0';
-  } else {
-    this._cardElementLikesCount.textContent = this._dataLikes.length
-  }
-  if (this.likedCard()) {
-    this._cardElementLike.classList.add('card__like_active');
-  } else {
-    this._cardElementLike.classList.remove('card__like_active');
-  }
-}
-
-
-
-
-  /**Лайкаем карточку
+  /**Лайкаем карточку */
   _toggleLike() {
-    this._cardElementLike.classList.toggle('card__like_active');
+    if (this._cardElementLike.classList.contains(this._cardLikeActiveClass)) {
+      this._handleDeleteLike(this._id).then(() => {
+        this._cardElementLike.classList.toggle(this._cardLikeActiveClass);
+      })
+    }
+    else {
+      this._handleSetLike(this._id).then(() => {
+        this._cardElementLike.classList.toggle(this._cardLikeActiveClass);
+      })
+    }
   };
- */
-  
+
   /** Удаляем карточку */
   _deleteCard = (evt) => {
-    evt.target.closest('.card').remove()
-    this._cardElement = null;
+
+    const removePopup = new PopupWithRemoval(".popup_type_delete", {
+      submitCallback: () => {
+        this._handleDeleteClick(this._id).then(() => {
+
+          evt.target.closest('.card').remove()
+          this._cardElement = null;
+          removePopup.close()
+        })
+      }
+    })
+    removePopup.open()
   };
 
   /**Слушатели событий */
   _setEventListeners() {
 
-    this._cardElementLike.addEventListener('click', () => this.togleLike());
-    this._cardElementDel.addEventListener('click', () => this._handleCardDelete(this, this.idCard));
-    this._cardElementPhoto.addEventListener('click', () => this._handleCardClick());
+    const cardElementDelete = this._cardElement.querySelector('.card__delete');
+    this._cardElementLike.addEventListener('click', () => this._toggleLike());
+    cardElementDelete.addEventListener('click', this._deleteCard);
+
+    this._cardPicture.addEventListener('click', () =>
+      this._handleCardClick({
+        link: this._link,
+        name: this._name,
+      }));
   };
 };
 
