@@ -1,10 +1,11 @@
 class UserInfo {
-  constructor({ selectorUserName, selectorUserDescription }) {
+  constructor({ selectorUserName, selectorUserDescription, selectorUserAvatar }) {
     this._profileName = document.querySelector(selectorUserName);
     this._profileDescription = document.querySelector(selectorUserDescription);
+    this._profileAvatar = document.querySelector(selectorUserAvatar);
   }
 
-  /**Функция получения информации из профиля */
+  // Получение информации из профиля */
   getUserInfo() {
     return {
       name: this._profileName.textContent,
@@ -12,11 +13,16 @@ class UserInfo {
     }
   }
 
-  /**Функция добавления информации в профиль из формы */
+  // Добавление информации в профиль из формы
   setUserInfo({ name, description }) {
     this._profileName.textContent = name;
     this._profileDescription.textContent = description;
   }
+
+// Добавление ссылки на аватар
+setUserAvatar(url) {
+  this._profileAvatar.src = url.avatar;
+}
 
 };
 

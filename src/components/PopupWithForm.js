@@ -14,7 +14,7 @@ class PopupWithForm extends Popup {
     this.setEventListeners()
   }
 
-  /**Получаем значения input */
+  //Получаем значения input 
   _getInputValues() {
     this._inputsValues = {};
     this._inputList.forEach((input) => {
@@ -23,18 +23,29 @@ class PopupWithForm extends Popup {
     return this._inputsValues;
   }
 
-  /**передаем форме input переданные данные*/
+  //передаем форме input переданные данные
   setInputValues = (data) => {
     this._inputList.forEach((input) => {
       input.value = data[input.name]
     });
   }
 
-  /**Закрываем и чистим */
+  //Закрываем и чистим 
   close() {
     this._form.reset();
     super.close();
   }
+
+//Функция отображения Preloader 
+renderPreloader(loading, displayText) {
+  if (!this._buttonSubmit) return;
+  if (loading) {
+    this.defaulText = this._buttonSubmit.textContent;
+    this._buttonSubmit.textContent = displayText;
+  } else {
+    this._buttonSubmit.textContent = this.defaulText;
+  }
+}
 
 };
 

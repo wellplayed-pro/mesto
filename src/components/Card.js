@@ -7,7 +7,6 @@ class Card {
     this._id = card._id;
     this._isMine = card.isMine;
     this._isLiked = card.isLiked;
-
     this._templateSelector = document.querySelector(templateSelector).content.querySelector('.card');
     this._handleCardClick = handlers.onClick;
     this._handleDeleteClick = handlers.onDeleteClick;

@@ -4,7 +4,7 @@ import { Section } from "../components/Section.js"
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
-import { apiConfig, initialCards, validationSettings } from '../utils/utils.js';
+import { apiConfig, validationSettings } from '../utils/utils.js';
 import { Api } from "../components/Api.js"
 import './index.css'; // добавьте импорт главного файла стилей 
 import { PopupWithRemoval } from '../components/PopupWithRemoval.js';
@@ -18,30 +18,42 @@ const formValidators = {}
 // edit profile
 const editProfileButton = document.querySelector(".profile__button-edit");
 
-const userInfo = new UserInfo({ selectorUserName: ".profile__name", selectorUserDescription: ".profile__description" })
-
-function updateProfile(evt) {
-  api.setUserInfoApi({ name: evt.name, about: evt.description }).then((data) => {
-    userInfo.setUserInfo({ name: data.name, description: data.about })
-    editProfilePopup.close();
-  })
-}
+const userInfo = new UserInfo({ selectorUserName: ".profile__name", selectorUserDescription: ".profile__description", selectorUserAvatar: '.profile__logo' })
 
 api.getUserInfo().then(info => {
   userInfo.setUserInfo({ name: info.name, description: info.about })
-  const logo = document.querySelector('.profile__logo');
   logo.src = info.avatar
   userId = info._id;
 })
 
 
-const editProfilePopup = new PopupWithForm("#popup-edit-profile", { submitCallback: updateProfile });
+
+
+
+//Редактирование профиля с загрузкой
+const editProfilePopup = new PopupWithForm("#popup-edit-profile", { submitCallback: (data) => {
+  editProfilePopup.renderPreloader(true, 'Загрузка...')
+  api.setUserInfoApi({ name: data.name, about: data.description }).then((data) => {
+    userInfo.setUserInfo({ name: data.name, description: data.about })
+    editProfilePopup.close();
+  })
+  .catch((err) => alert(err))
+  .finally(() => {
+    editProfilePopup.renderPreloader(false);
+  })
+}
+})
 
 editProfileButton.addEventListener("click", () => {
   editProfilePopup.setInputValues(userInfo.getUserInfo())
   formValidators['form-popup-profile'].clearValidationForm()
   editProfilePopup.open()
 });
+
+//Функция создания Popup редактирования аватара 
+
+
+
 
 // show image popup
 const showImagePopup = new PopupWithImage("#popup-show-photo");
