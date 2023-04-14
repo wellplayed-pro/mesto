@@ -18,17 +18,16 @@ const formValidators = {}
 // edit profile
 const editProfileButton = document.querySelector(".profile__button-edit");
 
-const userInfo = new UserInfo({ selectorUserName: ".profile__name", selectorUserDescription: ".profile__description", selectorUserAvatar: '.profile__logo' })
+const userInfo = new UserInfo({
+  selectorUserName: ".profile__name",
+  selectorUserDescription: ".profile__description",
+  selectorUserAvatar: ".profile__logo"
+})
 
 api.getUserInfo().then(info => {
   userInfo.setUserInfo({ name: info.name, description: info.about })
-  logo.src = info.avatar
   userId = info._id;
 })
-
-
-
-
 
 //Редактирование профиля с загрузкой
 const editProfilePopup = new PopupWithForm("#popup-edit-profile", { submitCallback: (data) => {
@@ -50,10 +49,16 @@ editProfileButton.addEventListener("click", () => {
   editProfilePopup.open()
 });
 
-//Функция создания Popup редактирования аватара 
 
 
+ //Функция создания Popup редактирования аватара
+ const popupOpenAvatar = document.querySelector('.profile__avatar-edit');
 
+//Функция открытия Popup аватара
+popupOpenAvatar.addEventListener('click', () => {
+  popupFormAvatar.open();
+  formValidators['form-avatar'].clearValidationForm();
+})
 
 // show image popup
 const showImagePopup = new PopupWithImage("#popup-show-photo");
@@ -85,16 +90,37 @@ function addNewPlace(place) {
 }
 
 function createCardAndAddInMarkup(place) {
+  addPlacePopup.renderPreloader(true, 'Сохранение...')
   api.addNewCard(place).then(newPlace => {
     addNewPlace(newPlace)
   })
 }
 
 const addPlacePopup = new PopupWithForm("#popup-add-photo", { submitCallback: createCardAndAddInMarkup })
+
+
 addButton.addEventListener("click", () => {
   formValidators['form-popup-photo'].clearValidationForm()
   addPlacePopup.open()
 });
+
+
+
+//Функция создания Popup подтверждения удаления 
+const popupFormDelete = new PopupWithRemoval('.popup_type_delete', {
+  submitCallback: (id, card) => {
+    popupFormDelete.renderPreloader(true, 'Удаление...');
+    api.deleteCard(id)
+    .then(() => {
+      card.deleteCard();
+      popupFormDelete.close();
+    })
+    .catch((err) => alert(err))
+    .finally(() => {
+      popupFormDelete.renderPreloader(false);
+    })
+  }
+})
 
 // Включение валидации
 const enableValidation = (config) => {
