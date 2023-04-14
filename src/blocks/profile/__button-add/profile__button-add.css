@@ -9,10 +9,9 @@
   background-color: transparent;
   background-image: url(../../../images/plus.svg);
   background-repeat: no-repeat;
-  background-position:center;
-  padding:0;
-
-
+  background-position: center;
+  padding: 0;
+  margin-left: auto;
 }
 .profile__button-add:hover {
   opacity: 0.6;

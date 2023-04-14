@@ -19,10 +19,10 @@ class UserInfo {
     this._profileDescription.textContent = description;
   }
 
-// Добавление ссылки на аватар
-setUserAvatar(url) {
-  this._profileAvatar.src = url.avatar;
-}
+  // Добавление ссылки на аватар
+  setUserAvatar(url) {
+    this._profileAvatar.src = url;
+  }
 
 };
 

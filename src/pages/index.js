@@ -24,23 +24,19 @@ const userInfo = new UserInfo({
   selectorUserAvatar: ".profile__logo"
 })
 
-api.getUserInfo().then(info => {
-  userInfo.setUserInfo({ name: info.name, description: info.about })
-  userId = info._id;
-})
-
 //Редактирование профиля с загрузкой
-const editProfilePopup = new PopupWithForm("#popup-edit-profile", { submitCallback: (data) => {
-  editProfilePopup.renderPreloader(true, 'Загрузка...')
-  api.setUserInfoApi({ name: data.name, about: data.description }).then((data) => {
-    userInfo.setUserInfo({ name: data.name, description: data.about })
-    editProfilePopup.close();
-  })
-  .catch((err) => alert(err))
-  .finally(() => {
-    editProfilePopup.renderPreloader(false);
-  })
-}
+const editProfilePopup = new PopupWithForm("#popup-edit-profile", {
+  submitCallback: (data) => {
+    editProfilePopup.renderPreloader(true, 'Загрузка...')
+    api.setUserInfoApi({ name: data.name, about: data.description }).then((data) => {
+      userInfo.setUserInfo({ name: data.name, description: data.about })
+      editProfilePopup.close();
+    })
+      .catch((err) => alert(err))
+      .finally(() => {
+        editProfilePopup.renderPreloader(false);
+      })
+  }
 })
 
 editProfileButton.addEventListener("click", () => {
@@ -51,8 +47,22 @@ editProfileButton.addEventListener("click", () => {
 
 
 
- //Функция создания Popup редактирования аватара
- const popupOpenAvatar = document.querySelector('.profile__avatar-edit');
+//Функция создания Popup редактирования аватара
+const popupFormAvatar = new PopupWithForm(".popup_type_avatar", {
+  submitCallback: (data) => {
+    popupFormAvatar.renderPreloader(true, 'Загрузка...')
+    api.setUserAvatar(data).then(userInfoFromServer => {
+      userInfo.setUserAvatar(userInfoFromServer.avatar)
+      popupFormAvatar.close()
+    })
+    .catch((err) => alert(err))
+    .finally(() => {
+      popupFormAvatar.renderPreloader(false);
+    })
+  }
+})
+
+const popupOpenAvatar = document.querySelector('.profile__avatar-edit');
 
 //Функция открытия Popup аватара
 popupOpenAvatar.addEventListener('click', () => {
@@ -75,10 +85,6 @@ function createCard(item) {
 }
 
 let cardsList;
-api.getInitialCards().then(cards => {
-  cardsList = new Section({ items: cards, renderer: createCard }, ".elements");
-  cardsList.renderItems()
-})
 
 // add new place
 const addButton = document.querySelector(".profile__button-add");
@@ -93,8 +99,12 @@ function createCardAndAddInMarkup(place) {
   addPlacePopup.renderPreloader(true, 'Сохранение...')
   api.addNewCard(place).then(newPlace => {
     addNewPlace(newPlace)
+  }).catch((err) => alert(err))
+  .finally(() => {
+    addPlacePopup.renderPreloader(false);
   })
 }
+
 
 const addPlacePopup = new PopupWithForm("#popup-add-photo", { submitCallback: createCardAndAddInMarkup })
 
@@ -111,14 +121,14 @@ const popupFormDelete = new PopupWithRemoval('.popup_type_delete', {
   submitCallback: (id, card) => {
     popupFormDelete.renderPreloader(true, 'Удаление...');
     api.deleteCard(id)
-    .then(() => {
-      card.deleteCard();
-      popupFormDelete.close();
-    })
-    .catch((err) => alert(err))
-    .finally(() => {
-      popupFormDelete.renderPreloader(false);
-    })
+      .then(() => {
+        card.deleteCard();
+        popupFormDelete.close();
+      })
+      .catch((err) => alert(err))
+      .finally(() => {
+        popupFormDelete.renderPreloader(false);
+      })
   }
 })
 
@@ -135,3 +145,14 @@ const enableValidation = (config) => {
   });
 };
 enableValidation(validationSettings);
+
+
+Promise.all([api.getUserInfo(), api.getInitialCards()]).then(([userInfoFromServer, cards]) => {
+
+  userInfo.setUserInfo({ name: userInfoFromServer.name, description: userInfoFromServer.about })
+  userInfo.setUserAvatar(userInfoFromServer.avatar)
+  userId = userInfoFromServer._id;
+
+  cardsList = new Section({ items: cards, renderer: createCard }, ".elements");
+  cardsList.renderItems()
+})
