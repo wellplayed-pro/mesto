@@ -7,11 +7,7 @@ class PopupWithForm extends Popup {
     this._form = this._popup.querySelector('.form-popup');
     this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
     this._buttonSubmit = this._form.querySelector('.popup__button_act_submit');
-    this._form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      this._submitCallback(this._getInputValues());
-    })
-    this.setEventListeners()
+    this._defaultSubmitBtnText = this._buttonSubmit?.textContent;
   }
 
   //Получаем значения input 
@@ -36,16 +32,23 @@ class PopupWithForm extends Popup {
     super.close();
   }
 
-//Функция отображения Preloader 
-renderPreloader(loading, displayText) {
-  if (!this._buttonSubmit) return;
-  if (loading) {
-    this.defaulText = this._buttonSubmit.textContent;
-    this._buttonSubmit.textContent = displayText;
-  } else {
-    this._buttonSubmit.textContent = this.defaulText;
+  //Функция отображения Preloader 
+  renderPreloader(loading, displayText) {
+    if (!this._buttonSubmit) return;
+    if (loading) {
+      this._buttonSubmit.textContent = displayText;
+    } else {
+      this._buttonSubmit.textContent = this._defaultSubmitBtnText;
+    }
   }
-}
+
+  setEventListeners() {
+    super.setEventListeners();
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._submitCallback(this._getInputValues());
+    })
+  }
 
 };
 

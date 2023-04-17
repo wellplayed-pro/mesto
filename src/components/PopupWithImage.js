@@ -5,7 +5,6 @@ class PopupWithImage extends Popup {
     super(popupSelector);
     this._imgCard = this._popup.querySelector('.popup__photo');
     this._nameCard = this._popup.querySelector('.popup__caption');
-    this.setEventListeners()
   }
 
   /**Открываем Popup с внесением данных */
