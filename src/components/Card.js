@@ -54,8 +54,8 @@ class Card {
   }
 
   delCard() {
-    this.cardElement.remove();
-    this.cardElement = null;
+    this._cardElement.remove();
+    this._cardElement = null;
   };
 
   /**Слушатели событий */
