@@ -81,7 +81,7 @@ const removePopup = new PopupWithRemoval(".popup_type_delete", {
     removePopup.renderPreloader(true, 'Удаление...')
     api.deleteCard(id).then(() => {
       console.log(cardElement);
-      cardElement.deleteCard();
+      cardElement.delCard();
       removePopup.close();
     }).catch((err) => alert(err))
     .finally(() => {
