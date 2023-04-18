@@ -78,9 +78,14 @@ showImagePopup.setEventListeners()
 
 const removePopup = new PopupWithRemoval(".popup_type_delete", {
   submitCallback: (cardElement, id) => {
+    removePopup.renderPreloader(true, 'Удаление...')
     api.deleteCard(id).then(() => {
-      cardElement.remove()
-      removePopup.close()
+      console.log(cardElement);
+      cardElement.deleteCard();
+      removePopup.close();
+    }).catch((err) => alert(err))
+    .finally(() => {
+      removePopup.renderPreloader(false);
     })
   }
 })
@@ -106,7 +111,7 @@ function createCard(item) {
   return card.generateCard();
 }
 
-let cardsList = new Section({ renderer: createCard }, ".elements");
+const cardsList = new Section({ renderer: createCard }, ".elements");
 
 // add new place
 const addButton = document.querySelector(".profile__button-add");

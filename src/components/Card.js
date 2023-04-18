@@ -53,12 +53,18 @@ class Card {
     this._cardElementLikeCount.textContent = likes.length
   }
 
+  deleteCard() {
+    this.cardElement.remove();
+    this.cardElement = null;
+  };
+
+
   /**Слушатели событий */
   _setEventListeners() {
 
     const cardElementDelete = this._cardElement.querySelector('.card__delete');
     this._cardElementLike.addEventListener('click', () => this._handleSetLikeStatus(this._cardElementLike.classList.contains(this._cardLikeActiveClass)));
-    cardElementDelete.addEventListener('click', () => this._handleDeleteClick(this._cardElement, this._id));
+    cardElementDelete.addEventListener('click', () => this._handleDeleteClick(this.cardElement, this._id));
 
     this._cardPicture.addEventListener('click', () =>
       this._handleCardClick({
